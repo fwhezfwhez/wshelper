@@ -1,18 +1,12 @@
 package wshelper
 
 import (
+	"eyas/wshelper/util"
 	"fmt"
 	"testing"
 )
 func TestConfig(t *testing.T) {
-	Assertf(v.Get("MaxOnlineConnPerPool") != nil, t, "no such field 'MaxOnlineConnPerPool', add it in config.yaml")
-}
-
-func TestBKBMBGB(t *testing.T) {
-	Assertf(B == 1, t, "want 1024 but got %d", B)
-	Assertf(KB == 1024, t, "want 1024 but got %d", KB)
-	Assertf(MB == 1024*KB, t, "want 1024 but got %d", MB)
-	Assertf(GB == 1024*MB, t, "want 1024 but got %d", GB)
+	util.Assertf(v.Get("maxOnlineConnPerPool") != nil, t, "no such field 'maxOnlineConnPerPool', add it in config.yaml")
 }
 
 func TestWebSocketHelper_SetCommands_ListCommands(t *testing.T) {

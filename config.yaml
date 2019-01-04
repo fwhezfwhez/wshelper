@@ -1,2 +1,3 @@
 # do not delete MaxOnlineConnPerPool
-MaxOnlineConnPerPool: 50000
+maxOnlineConnPerPool: 50000
+logFilePath: G:\\go_workspace\\GOPATH\\src\\eyas\\wshelper\\error.log

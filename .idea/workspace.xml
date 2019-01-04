@@ -39,13 +39,19 @@
       <change afterPath="$PROJECT_DIR$/../eyas-sales-server/utils/util.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../eyas-sales-server/utils/util_test.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../testLineNumIngo/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connection_pool.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/init.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wshelper.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wshelper_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/doc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/mysql/dao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dao/postgres/dao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/json_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/json/model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/protobuf/model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/protobuf_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reply_types.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/serviceI.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/interfaceGenerator/generator.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/util/interfaceGenerator/generator_test.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../github.com/moby/moby/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../go-chat/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../go-chat/client/single/main.go" afterDir="false" />
@@ -104,6 +110,14 @@
       <change beforePath="$PROJECT_DIR$/../../Pay" beforeDir="false" afterPath="$PROJECT_DIR$/../../Pay" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../PrintControler" beforeDir="false" afterPath="$PROJECT_DIR$/../../PrintControler" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Queue" beforeDir="false" afterPath="$PROJECT_DIR$/../../Queue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connection_pool.go" beforeDir="false" afterPath="$PROJECT_DIR$/connection_pool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/utils.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wshelper.go" beforeDir="false" afterPath="$PROJECT_DIR$/wshelper.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wshelper_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/wshelper_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../github.com/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../github.com/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../github.com/BurntSushi/toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../github.com/BurntSushi/toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../github.com/fwhezfwhez/go-BinaryTree" beforeDir="false" afterPath="$PROJECT_DIR$/../../github.com/fwhezfwhez/go-BinaryTree" afterDir="false" />
@@ -326,6 +340,8 @@
       <change beforePath="$PROJECT_DIR$/../../qinglong_api" beforeDir="false" afterPath="$PROJECT_DIR$/../../qinglong_api" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../superChecker" beforeDir="false" afterPath="$PROJECT_DIR$/../../superChecker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../test_X" beforeDir="false" afterPath="$PROJECT_DIR$/../../test_X" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test_X/test_log/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../test_X/test_log/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../test_X/test_protobuf/Im/helloworld.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../../test_X/test_protobuf/Im/helloworld.pb.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../test_chanel/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test_chanel/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../test_flag/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test_flag/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../test_redis/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../test_redis/.idea/workspace.xml" afterDir="false" />
@@ -382,49 +398,58 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="5061" />
-          <entry key="yaml" value="48" />
+          <entry key="go" value="15675" />
+          <entry key="yaml" value="66" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="5061" />
-          <entry key="YAML" value="48" />
+          <entry key="Go" value="15675" />
+          <entry key="YAML" value="66" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="16" />
-          <entry key="yaml" value="2" />
+          <entry key="go" value="87" />
+          <entry key="yaml" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="16" />
-          <entry key="YAML" value="2" />
+          <entry key="Go" value="87" />
+          <entry key="YAML" value="5" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wshelper.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="852">
-              <caret line="173" column="1" lean-forward="true" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
+            <state relative-caret-position="917">
+              <caret line="112" column="50" lean-forward="true" selection-start-line="112" selection-start-column="50" selection-end-line="112" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wshelper_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+              <folding>
+                <element signature="e#18#46#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/init.go">
+        <entry file="file://$PROJECT_DIR$/reply_types.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-              <folding>
-                <element signature="e#18#126#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="312">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -432,8 +457,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connection_pool.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="83" column="40" lean-forward="true" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+            <state relative-caret-position="189">
+              <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding>
+                <element signature="n#!!block;n#NewConnectionPool#0" />
+                <element signature="n#!!block;n#Length#0" />
+                <element signature="n#!!block;n#SetFull#0" />
+                <element signature="n#!!block;n#Remove#0" />
+                <element signature="n#!!block;n#IfExist#0" />
+                <element signature="n#!!block;n#Supervisor#0" />
+                <element signature="n#!!block;n#SendMany#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="16" selection-start-column="16" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/init.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="41" column="40" lean-forward="true" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/serviceI.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -441,30 +502,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="1" column="20" selection-start-line="1" selection-end-line="1" selection-end-column="20" />
+            <state relative-caret-position="78">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wshelper_test.go">
+        <entry file="file://$PROJECT_DIR$/protobuf_service.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-              <folding>
-                <element signature="e#18#46#0" expanded="true" />
-                <element signature="n#!!block;n#TestBKBMBGB#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+            <state>
+              <caret column="16" selection-start-column="16" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -472,17 +520,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/built-in_comands.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/go_1.11/src/runtime/panic.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="680" selection-start-line="680" selection-end-line="680" />
+            <state relative-caret-position="100">
+              <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -503,19 +542,49 @@
   </component>
   <component name="GOROOT" path="E:\go_1.11" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/built-inComands.go" />
-        <option value="$PROJECT_DIR$/wshelper.go" />
-        <option value="$PROJECT_DIR$/utils.go" />
         <option value="$PROJECT_DIR$/built-in_comands.go" />
-        <option value="$PROJECT_DIR$/init.go" />
         <option value="$PROJECT_DIR$/config.go" />
-        <option value="$PROJECT_DIR$/connection_pool.go" />
+        <option value="$PROJECT_DIR$/init.go" />
         <option value="$PROJECT_DIR$/config.yaml" />
+        <option value="$PROJECT_DIR$/utils.go" />
+        <option value="$PROJECT_DIR$/model/repley.go" />
+        <option value="$PROJECT_DIR$/model/reply.go" />
+        <option value="$PROJECT_DIR$/reply_types.go" />
+        <option value="$PROJECT_DIR$/dao.go" />
+        <option value="$PROJECT_DIR$/Dao/mysql/dao.go" />
+        <option value="$PROJECT_DIR$/Dao/postgres/dao.go" />
+        <option value="$PROJECT_DIR$/Model/json/model.go" />
+        <option value="$PROJECT_DIR$/Model/protobuf/model.go" />
+        <option value="$PROJECT_DIR$/Model/xml/model.go" />
+        <option value="$PROJECT_DIR$/model/converter.go" />
+        <option value="$PROJECT_DIR$/model/doc.go" />
+        <option value="$PROJECT_DIR$/dao/DOC.go" />
+        <option value="$PROJECT_DIR$/dao/doc.go" />
+        <option value="$PROJECT_DIR$/connection_pool.go" />
+        <option value="$PROJECT_DIR$/interface{}.go" />
+        <option value="$PROJECT_DIR$/interface.go" />
+        <option value="$PROJECT_DIR$/model.go" />
+        <option value="$PROJECT_DIR$/model/json/model.go" />
+        <option value="$PROJECT_DIR$/model/protobuf/model.go" />
+        <option value="$PROJECT_DIR$/model/xml/model.go" />
+        <option value="$PROJECT_DIR$/util/utils.go" />
+        <option value="$PROJECT_DIR$/model/base.go" />
+        <option value="$PROJECT_DIR$/model/baseI.go" />
+        <option value="$PROJECT_DIR$/util/interfaceGenerator/generator_test.go" />
+        <option value="$PROJECT_DIR$/util/interfaceGenerator/generator.go" />
+        <option value="$PROJECT_DIR$/model/baseM.go" />
+        <option value="$PROJECT_DIR$/wshelper.go" />
+        <option value="$PROJECT_DIR$/command_service.go" />
+        <option value="$PROJECT_DIR$/service/json/service.go" />
+        <option value="$PROJECT_DIR$/protobuf_service.go" />
+        <option value="$PROJECT_DIR$/json_service.go" />
+        <option value="$PROJECT_DIR$/serviceI.go" />
         <option value="$PROJECT_DIR$/wshelper_test.go" />
       </list>
     </option>
@@ -526,7 +595,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="width" value="1024" />
     <option name="height" value="744" />
   </component>
@@ -558,6 +627,15 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\go_workspace\GOPATH\src\eyas\wshelper\util" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\go_workspace\GOPATH\src\eyas\wshelper\model\json" />
+      <recent name="G:\go_workspace\GOPATH\src\eyas\wshelper\dao" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -570,7 +648,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.TestConfig in eyas/wshelper">
+  <component name="RunManager" selected="Go Test.TestGenerator in eyas/wshelper/util/interfaceGenerator">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="wshelper" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -603,6 +681,28 @@
       <pattern value="^TestConfig$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="wshelper" />
+      <working_directory value="$PROJECT_DIR$/util/interfaceGenerator" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="eyas/wshelper/util/interfaceGenerator" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestCutAfterN$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGenerator in eyas/wshelper/util/interfaceGenerator" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="wshelper" />
+      <working_directory value="$PROJECT_DIR$/util/interfaceGenerator" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="eyas/wshelper/util/interfaceGenerator" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestGenerator$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestWebSocketHelper_SetCommands_ListCommands in eyas/wshelper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="wshelper" />
       <working_directory value="$PROJECT_DIR$" />
@@ -629,9 +729,13 @@
       <item itemvalue="Go Test.TestWebSocketHelper_SetCommands_ListCommands in eyas/wshelper" />
       <item itemvalue="Go Test.TestBKBMBGB in eyas/wshelper" />
       <item itemvalue="Go Test.TestConfig in eyas/wshelper" />
+      <item itemvalue="Go Test.TestGenerator in eyas/wshelper/util/interfaceGenerator" />
+      <item itemvalue="Go Test.TestCutAfterN in eyas/wshelper/util/interfaceGenerator" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestGenerator in eyas/wshelper/util/interfaceGenerator" />
+        <item itemvalue="Go Test.TestCutAfterN in eyas/wshelper/util/interfaceGenerator" />
         <item itemvalue="Go Test.TestConfig in eyas/wshelper" />
         <item itemvalue="Go Test.TestBKBMBGB in eyas/wshelper" />
         <item itemvalue="Go Test.TestWebSocketHelper_SetCommands_ListCommands in eyas/wshelper" />
@@ -639,39 +743,40 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 49m 54s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 20h 38m 20s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 50m 15s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 03m 56s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 50m 55s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 04m 21s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 51m 52s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 09m 52s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 52m 39s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 10m 31s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 53m 19s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 10m 57s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 53m 45s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 11m 49s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 21h 54m 13s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestCutAfterN_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 12m 42s.xml">
+      <configuration name="TestCutAfterN in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 22h 00m 44s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestGenerator_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 15m 06s.xml">
+      <configuration name="TestGenerator in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestConfig_in_eyas_wshelper - 2019.01.02 at 22h 05m 00s.xml">
-      <configuration name="TestConfig in eyas/wshelper" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestGenerator_in_eyas_wshelper_util_interfaceGenerator - 2019.01.04 at 21h 15m 30s.xml">
+      <configuration name="TestGenerator in eyas/wshelper/util/interfaceGenerator" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13113007" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -685,7 +790,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32899022" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -700,13 +805,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../golang.org/x/net/websocket/websocket.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="278" column="16" selection-start-line="278" selection-start-column="16" selection-end-line="278" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../utils/utils.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
@@ -735,16 +833,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#18#126#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -752,49 +840,255 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/connection_pool.go">
+    <entry file="file://$PROJECT_DIR$/../../github.com/gin-gonic/gin/gin.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="83" column="40" lean-forward="true" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+        <state relative-caret-position="293">
+          <caret line="44" column="12" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.yaml">
+    <entry file="file://$PROJECT_DIR$/../../golang.org/x/net/websocket/websocket.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="351" column="26" selection-start-line="351" selection-start-column="26" selection-end-line="351" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/reply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/postgres/dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/converter.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/mysql/dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/doc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/doc.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
-          <caret line="1" column="20" selection-start-line="1" selection-end-line="1" selection-end-column="20" />
+          <caret line="1" column="128" selection-start-line="1" selection-start-column="128" selection-end-line="1" selection-end-column="128" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wshelper_test.go">
+    <entry file="file://$PROJECT_DIR$/interface.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        <state relative-caret-position="52">
+          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/protobuf/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="4" selection-start-line="4" selection-end-line="19" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/xml/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="4" selection-start-line="4" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/go_1.11/src/strings/strings.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="821" column="5" selection-start-line="821" selection-start-column="5" selection-end-line="821" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/go_1.11/src/fmt/print.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="271" column="22" lean-forward="true" selection-start-line="271" selection-start-column="22" selection-end-line="271" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/interfaceGenerator/generator_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
           <folding>
-            <element signature="e#18#46#0" expanded="true" />
-            <element signature="n#!!block;n#TestBKBMBGB#0" />
+            <element signature="e#28#56#0" expanded="true" />
+            <element signature="n#!!block;n#TestCutAfterN#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils.go">
+    <entry file="file://$PROJECT_DIR$/util/interfaceGenerator/generator.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        <state relative-caret-position="216">
+          <caret line="62" column="127" lean-forward="true" selection-start-line="62" selection-start-column="127" selection-end-line="62" selection-end-column="127" />
+          <folding>
+            <element signature="e#28#65#0" expanded="true" />
+            <element signature="e#100#454#0" />
+            <element signature="e#455#457#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/utils.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/baseI.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/base.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/baseM.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/json/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/json/service.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/json_service.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/built-in_comands.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        <state relative-caret-position="100">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connection_pool.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!block;n#NewConnectionPool#0" />
+            <element signature="n#!!block;n#Length#0" />
+            <element signature="n#!!block;n#SetFull#0" />
+            <element signature="n#!!block;n#Remove#0" />
+            <element signature="n#!!block;n#IfExist#0" />
+            <element signature="n#!!block;n#Supervisor#0" />
+            <element signature="n#!!block;n#SendMany#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="41" column="40" lean-forward="true" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protobuf_service.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reply_types.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serviceI.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wshelper.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="852">
-          <caret line="173" column="1" lean-forward="true" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
+        <state relative-caret-position="917">
+          <caret line="112" column="50" lean-forward="true" selection-start-line="112" selection-start-column="50" selection-end-line="112" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wshelper_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="e#18#46#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
